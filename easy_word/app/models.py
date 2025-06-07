@@ -1,10 +1,9 @@
 # api/models.py
 
 from django.db import models
-from django.contrib.auth.models import User # <-- Импортируем модель User
+from django.contrib.auth.models import User 
 
 class Dictionary(models.Model):
-    # ↓↓↓ Добавляем это поле ↓↓↓
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='dictionaries', verbose_name="Владелец")
     name = models.CharField(max_length=100, verbose_name="Название словаря")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
@@ -15,7 +14,6 @@ class Dictionary(models.Model):
     class Meta:
         verbose_name = "Словарь"
         verbose_name_plural = "Словари"
-        # Добавим ограничение, чтобы у одного пользователя не было словарей с одинаковым названием
         unique_together = ('owner', 'name')
 
 
