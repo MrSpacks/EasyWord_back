@@ -13,6 +13,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app',  # Моя апка
     'rest_framework',  # Django REST Framework
+    'rest_framework_simplejwt', # Django REST Framework JWT
+
 ]
 
 MIDDLEWARE = [
@@ -84,3 +86,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',  # если JWT
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+}
